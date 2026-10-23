@@ -1,100 +1,802 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ha">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Addu'o'i - By Central Chakus</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#fbf8ef;--card:#fff;--green:#0f4c3a;--gold:#c8a951;--text:#1a2e26;--muted:#6b7f77;--shadow:0 10px 30px rgba(15,76,58,0.08);--radius:18px;--input:#fff}
-body.dark{--bg:#0e1e18;--card:#162921;--text:#e8f0e8;--muted:#9bb3a8;--input:#1e352a;--shadow:0 10px 30px rgba(0,0,0,0.3)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;transition:.3s}
-header{text-align:center;padding:50px 20px 70px;background:linear-gradient(180deg,#0f4c3a 0%,#123e31 100%);color:white;border-bottom-left-radius:32px;border-bottom-right-radius:32px}
-.topbar{display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:0 auto 30px;padding:0 10px}
-.logo{font-weight:700;font-size:1.1rem}
-.icon-btn{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;padding:8px 14px;border-radius:999px;cursor:pointer}
-.search-box{max-width:600px;margin:0 auto;position:relative}
-.search-box input{width:100%;padding:16px 20px 16px 48px;border-radius:999px;border:none;font-size:1rem;box-shadow:0 8px 20px rgba(0,0,0,0.15);outline:none;background:var(--input);color:var(--text)}
-.search-box span{position:absolute;left:18px;top:50%;transform:translateY(-50%)}
-.container{max-width:860px;margin:-30px auto 0;padding:0 16px}
-.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 24px;margin:18px 0;border:1px solid rgba(200,169,81,0.25)}
-.num{font-weight:700;color:var(--gold);font-size:0.8rem;letter-spacing:1px;text-transform:uppercase}
-.title{font-weight:600;font-size:1.15rem;margin:6px 0 16px;color:var(--green)}body.dark .title{color:var(--gold)}
-.arabic{font-family:'Amiri',serif;font-size:1.6rem;line-height:2.2;text-align:right;direction:rtl;background:rgba(251,248,239,0.6);padding:18px;border-radius:12px;border:1px dashed #e8dfc0}body.dark .arabic{background:rgba(0,0,0,0.2);border-color:#2a4a3a;color:#e8f5d0}
-.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
-.btn{border:none;border-radius:999px;padding:10px 18px;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:600}
-.btn-play{background:var(--green);color:white}.btn-play.playing{background:#c0392b}
-.btn-toggle{background:transparent;color:var(--green);border:1.5px solid #dbe7e1}body.dark .btn-toggle{border-color:#2a4a3a;color:#a8c4b3}
-.audio-player{margin-top:12px;display:none;width:100%} .audio-player.show{display:block}
-.hausa-wrap{max-height:0;overflow:hidden;opacity:0;transition:all .4s ease}
-.hausa-wrap.open{max-height:600px;opacity:1;margin-top:16px}
-.hausa{background:rgba(244,247,245,0.8);border-left:4px solid var(--gold);padding:14px 16px;border-radius:8px;font-style:italic}body.dark .hausa{background:rgba(0,0,0,0.2)}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Duas & Surahs - Central Chakus</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Amiri for Arabic, Inter for English/Hausa -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --light-green: #e8f5e9;
+            --accent-green: #81c784;
+            --border-green: #c8e6c9;
+            --dark-green: #1b5e20;
+            --bg-white: #ffffff;
+            --card-bg: #ffffff;
+            --text-dark: #2c3e50;
+            --text-muted: #666666;
+            --shadow-light: 0 4px 15px rgba(46, 125, 50, 0.08);
+            --shadow-hover: 0 8px 25px rgba(46, 125, 50, 0.15);
+            --radius-main: 16px;
+            --radius-sm: 8px;
+            --arabic-font-scale: 1.8rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--light-green);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 60px;
+        }
+
+        /* HEADER & BRANDING */
+        header {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+            box-shadow: var(--shadow-light);
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        header p.subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .author-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        /* CONTROLS BAR */
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .controls-card {
+            background: var(--bg-white);
+            margin-top: -20px;
+            border-radius: var(--radius-main);
+            padding: 18px 22px;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-green);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1 1 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border-radius: 25px;
+            border: 1.5px solid var(--border-green);
+            outline: none;
+            font-size: 0.95rem;
+            background-color: #fcfdfc;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-green);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-green);
+        }
+
+        .control-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn {
+            background-color: var(--light-green);
+            color: var(--primary-green);
+            border: 1px solid var(--border-green);
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-green);
+            color: white;
+            border-color: var(--primary-green);
+        }
+
+        .lang-select {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* DUA LISTING */
+        .dua-list {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dua-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-main);
+            border: 1px solid var(--border-green);
+            padding: 22px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .dua-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .dua-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-green);
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+
+        .dua-number-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dua-number {
+            background-color: var(--primary-green);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .dua-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+
+        /* TOGGLE PANELS */
+        .toggle-btn {
+            width: 100%;
+            background-color: #f4fbf5;
+            border: 1px dashed var(--accent-green);
+            padding: 10px 15px;
+            border-radius: var(--radius-sm);
+            color: var(--primary-green);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--light-green);
+        }
+
+        .collapsible-content {
+            display: none;
+            padding-top: 15px;
+        }
+
+        .collapsible-content.open {
+            display: block;
+        }
+
+        /* ARABIC TEXT AREA */
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            font-size: var(--arabic-font-scale);
+            line-height: 2.2;
+            text-align: right;
+            direction: rtl;
+            color: #111111;
+            padding: 15px;
+            background-color: #fafdfa;
+            border-right: 4px solid var(--primary-green);
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        /* HAUSA TEXT AREA */
+        .hausa-text {
+            font-size: 0.98rem;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f7faf7;
+            padding: 15px;
+            border-left: 4px solid var(--accent-green);
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        /* AUDIO PLAYER & TOOLS */
+        .dua-tools {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .audio-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--light-green);
+            padding: 6px 14px;
+            border-radius: 30px;
+        }
+
+        .play-btn {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: transform 0.1s;
+        }
+
+        .play-btn:active {
+            transform: scale(0.95);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-icon-btn {
+            background: none;
+            border: 1px solid var(--border-green);
+            color: var(--primary-green);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .action-icon-btn:hover {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 30px 15px 15px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer strong {
+            color: var(--dark-green);
+        }
+
+        /* TOAST NOTIFICATION */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: var(--dark-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            font-size: 0.9rem;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.7rem; }
+            .controls-card { flex-direction: column; align-items: stretch; }
+            .control-btns { justify-content: space-between; }
+        }
+    </style>
 </head>
 <body>
-<header>
-<div class="topbar"><div class="logo">☪️ Central Chakus</div><button class="icon-btn" onclick="toggleDark()">🌙 Dark Mode</button></div>
-<h1>Find Peace in Daily Duas</h1>
-<p style="opacity:0.9;margin-top:8px">14 Duas • Arabic • Hausa • Audio</p>
-<p style="opacity:0.7;margin-top:6px;font-size:0.9rem">By Central Chakus • Ibrahim Abubakar Yakubu</p>
-<div class="search-box" style="margin-top:24px"><span>🔍</span><input type="text" id="search" placeholder="Search duas... e.g Fatiha, Ayatul Kursi..." oninput="doSearch(this.value)"></div>
-</header>
-<div class="container" id="container"></div>
-<footer style="margin-top:40px;padding:40px 20px;background:linear-gradient(180deg, #0f4c3a 0%, #0a2e24 100%);color:white;text-align:center;border-radius:24px 24px 0 0">
-<div style="max-width:600px;margin:0 auto">
-<p style="font-size:1.1rem;font-weight:600">Developed with ❤️ by</p>
-<h3 style="font-size:1.8rem;margin:10px 0;color:#c8a951">Central Chakus</h3>
-<p style="opacity:0.9;font-size:1.1rem">Ibrahim Abubakar Yakubu</p>
-<div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-<a href="https://wa.me/2348012345678" style="background:#25D366;color:white;padding:10px 20px;border-radius:999px;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px">💬 WhatsApp Me</a>
-<a href="https://github.com/centralchakus" style="background:rgba(255,255,255,0.12);color:white;padding:10px 20px;border-radius:999px;text-decoration:none;font-weight:600;border:1px solid rgba(255,255,255,0.2)">⭐ GitHub</a>
-</div>
-<div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-<span style="background:rgba(255,255,255,0.12);padding:6px 12px;border-radius:999px;font-size:0.8rem">📍 Warri, Delta State</span>
-<span style="background:rgba(200,169,81,0.2);padding:6px 12px;border-radius:999px;font-size:0.8rem">Addu'o'i Collection 2026</span>
-</div>
-<p style="margin-top:20px;opacity:0.6;font-size:0.85rem">Quran Recitation: Sheikh Mishary Alafasy<br>Subhana rabbika rabbil izzati amma yasifun, wa salamun alal mursalin, walhamdu lillahi rabbil alamin</p>
-</div>
-</footer>
-<script>
-const duas = [
-{title:"Du'a of Distress",arabic:`اللَّهُمَّ إِنِّي عَبْدُكَ، ابْنُ عَبْدِكَ، ابْنُ أَمَتِكَ، نَاصِيَتِي بِيَدِكَ، مَاضٍ فِيَّ حُكْمُكَ، عَدْلٌ فِيَّ قَضَاؤُكَ، أَسْأَلُكَ بِكُلِّ اسْمٍ هُوَ لَكَ، سَمَّيْتَ بِهِ نَفْسَكَ، أَوْ أَنْزَلْتَهُ فِي كِتَابِكَ، أَوْ عَلَّمْتَهُ أَحَدًا مِنْ خَلْقِكَ، أَوِ اسْتَأْثَرْتَ بِهِ فِي عِلْمِ الْغَيْبِ عِنْدَكَ، أَنْ تَجْعَلَ الْقُرْآنَ رَبِيعَ قَلْبِي، وَنُورَ صَدْرِي، وَجَلَاءَ حُزْنِي، وَذَهَابَ هَمِّي`,fullHausa:`Allahumma inni abduka, ibnu abdika, ibnu amatika, nasiyati biyadika, maadhin fiyya hukmuka, adlun fiyya qada'uka, as'aluka bikulli ismin huwa laka, sammaita bihi nafsaka, au anzaltahu fi kitabika, au allamtahu ahadan min khalqika, awi ista'tharta bihi fi ilmil ghaibi indaka, an taj'alal Qur'ana rabi'a qalbi, wa nura sadri, wa jala'a huzni, wa dhahaba hammi.`,audio:null},
-{title:"Du'a for Good Deeds",arabic:`اللَّهُمَّ إِنِّي أَسْأَلُكَ فِعْلَ الْخَيْرَاتِ، وَتَرْكَ الْمُنْكَرَاتِ، وَحُبَّ الْمَسَاكِينِ، وَأَنْ تَغْفِرَ لِي، وَتَرْحَمَنِي، وَإِذَا أَرَدْتَ فِتْنَةَ قَوْمٍ فَتَوَفَّنِي غَيْرَ مَفْتُونٍ، وَأَسْأَلُكَ حُبَّكَ، وَحُبَّ مَنْ يُحِبُّكَ، وَحُبَّ عَمَلٍ يُقَرِّبُنِي إِلَى حُبِّكَ`,fullHausa:`Allahumma inni as'aluka fi'lal khairati, wa tarkal munkarati, wa hubbal masakini, wa an taghfira li, wa tarhamani, wa idha aradta fitnata qawmin fatawaffani ghaira maftunin, wa as'aluka hubbaka, wa hubba man yuhibbuka, wa hubba amalin yuqarribuni ila hubbika.`,audio:null},
-{title:"Amman Yujibul Mudtarra - 27:62",arabic:`أَمَّن يُجِيبُ الْمُضْطَرَّ إِذَا دَعَاهُ وَيَكْشِفُ السُّوءَ وَيَجْعَلُكُمْ خُلَفَاءَ الْأَرْضِ ۗ أَإِلَٰهٌ مَّعَ اللَّهِ ۚ قَلِيلًا مَّا تَذَكَّرُونَ`,fullHausa:`Amman yujibul mudtarra iza da'ahu wa yakshifus su'a wa yaj'alukum khulafa'al ardi, a ilahun ma'allahi, qalilam ma tazakkarun.`,audio:null},
-{title:"Du'a for Forgiveness",arabic:`اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي`,fullHausa:`Allahumma innaka afuwwun tuhibbul afwa fa'fu anni.`,audio:null},
-{title:"Ayatul Kursiyyu - 2:255",arabic:`اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ`,fullHausa:`Allahu la ilaha illa huwal hayyul qayyum...`,audio:"https://cdn.islamic.network/quran/audio/128/ar.alafasy/2.mp3"},
-{title:"La Ilaha Illallah",arabic:`لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ`,fullHausa:`La ilaha illallahu wahdahu la sharika lahu, lahul mulku wa lahul hamdu, wa huwa ala kulli shai'in qadir.`,audio:null},
-{title:"Raditu Billahi",arabic:`رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا`,fullHausa:`Raditu billahi rabba, wa bil islami dina, wa bi Muhammadin sallallahu alaihi wa sallama nabiyya.`,audio:null},
-{title:"Bismillahillazi",arabic:`بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ`,fullHausa:`Bismillahillazi la yadurru ma'as mihi shai'un fil ardi wa la fis sama'i, wa huwas sami'ul alim.`,audio:null},
-{title:"Suratul Fatiha",arabic:`بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ، الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ، الرَّحْمَٰنِ الرَّحِيمِ، مَالِكِ يَوْمِ الدِّينِ، إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ، اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ، صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ`,fullHausa:`Bismillahir rahmanir rahim, Alhamdu lillahi rabbil alamin...`,audio:"https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3"},
-{title:"Suratul Ikhlas",arabic:`قُلْ هُوَ اللَّهُ أَحَدٌ، اللَّهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ`,fullHausa:`Qul huwallahu ahad, Allahus samad...`,audio:"https://cdn.islamic.network/quran/audio/128/ar.alafasy/112.mp3"},
-{title:"Suratul Falaq",arabic:`قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ، مِن شَرِّ مَا خَلَقَ، وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ، وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ`,fullHausa:`Qul a'uzu bi rabbil falaq...`,audio:"https://cdn.islamic.network/quran/audio/128/ar.alafasy/113.mp3"},
-{title:"Suratun Nass",arabic:`قُلْ أَعُوذُ بِرَبِّ النَّاسِ، مَلِكِ النَّاسِ، إِلَٰهِ النَّاسِ، مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ، الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ، مِنَ الْجِنَّةِ وَالنَّاسِ`,fullHausa:`Qul a'uzu bi rabbin nas...`,audio:"https://cdn.islamic.network/quran/audio/128/ar.alafasy/114.mp3"},
-{title:"Du'a of Firmness",arabic:`اللَّهُمَّ إِنِّي أَسْأَلُكَ الثَّبَاتَ فِي الْأَمْرِ، وَالْعَزِيمَةَ عَلَى الرُّشْدِ، وَأَسْأَلُكَ مُوجِبَاتِ رَحْمَتِكَ، وَعَزَائِمَ مَغْفِرَتِكَ، وَأَسْأَلُكَ شُكْرَ نِعْمَتِكَ، وَحُسْنَ عِبَادَتِكَ، وَأَسْأَلُكَ قَلْبًا سَلِيمًا، وَلِسَانًا صَادِقًا، وَأَسْأَلُكَ مِنْ خَيْرِ مَا تَعْلَمُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا تَعْلَمُ، وَأَسْتَغْفِرُكَ لِمَا تَعْلَمُ، إِنَّكَ أَنْتَ عَلَّامُ الْغُيُوبِ`,fullHausa:`Allahumma inni as'alukas sabata fil amri...`,audio:null},
-{title:"Closing Du'a",arabic:`سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ، وَسَلَامٌ عَلَى الْمُرْسَلِينَ، وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ`,fullHausa:`Subhana rabbika rabbil izzati amma yasifun, wa salamun alal mursalin, wal hamdu lillahi rabbil alamin.`,audio:null},
-];
-const container=document.getElementById('container');
-function render(){
-container.innerHTML='';
-duas.forEach((d,i)=>{
-const hasRealAudio = d.audio;
-const card=document.createElement('div');card.className='card';card.dataset.title=d.title.toLowerCase();
-card.innerHTML=`
-<div class="num">DUA ${i+1}</div>
-<div class="title">${d.title}</div>
-<div class="arabic">${d.arabic}</div>
-<div class="actions">
-${hasRealAudio?`<button class="btn btn-play" onclick="toggleRealAudio(${i},this)">🔊 Real Recitation</button>`: `<button class="btn btn-play" onclick="playTTS(${i},this)">🔊 Play Audio</button>`}
-<button class="btn btn-toggle" onclick="toggleHausa(${i})">👁 Show Hausa</button>
-<button class="btn btn-toggle" onclick="shareDua(${i})">↗ Share</button>
-</div>
-${hasRealAudio?`<audio class="audio-player" id="audio-${i}" controls src="${d.audio}"></audio>`:''}
-<div class="hausa-wrap" id="hausa-${i}"><div class="hausa">${d.fullHausa}</div></div>
-`;
-container.appendChild(card);
-});
-}
-render();
-function toggleRealAudio(i,btn){const aud=document.getElementById(`audio-${i}`);aud.classList.toggle('show');if(aud.classList.contains('show')){aud.play(); btn.innerHTML='⏸ Hide Audio';} else {aud.pause(); btn.innerHTML='🔊 Real Recitation';}}
-function playTTS(index,btn){if(window.speechSynthesis.speaking){window.speechSynthesis.cancel(); if(btn.classList.contains('playing')){btn.classList.remove('playing');btn.innerHTML='🔊 Play Audio';return;}}document.querySelectorAll('.
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-content">
+            <h1 id="ui-title">Islamic Duas & Surahs</h1>
+            <p class="subtitle" id="ui-subtitle">Collection of Authentic Supplications and Qur'anic Chapters</p>
+            <div class="author-badge">
+                <i class="fa-solid fa-user-check"></i> <span id="ui-author-label">Created by:</span> <strong>Central Chakus</strong> (Ibrahim Abubakar Yakubu)
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- CONTROLS & SEARCH -->
+        <div class="controls-card">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Search Dua..." oninput="filterDuas()">
+            </div>
+            
+            <div class="control-btns">
+                <button class="btn" onclick="toggleAll('arabic')">
+                    <i class="fa-solid fa-eye"></i> <span id="ui-toggle-arabic">Arabic (All)</span>
+                </button>
+                <button class="btn" onclick="toggleAll('hausa')">
+                    <i class="fa-solid fa-eye"></i> <span id="ui-toggle-hausa">Hausa (All)</span>
+                </button>
+                <button class="btn" onclick="adjustFontSize(0.1)" title="Increase Font"><i class="fa-solid fa-font"></i> A+</button>
+                <button class="btn" onclick="adjustFontSize(-0.1)" title="Decrease Font"><i class="fa-solid fa-font"></i> A-</button>
+
+                <!-- UI LANGUAGE SELECTOR -->
+                <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+                    <option value="en">English UI</option>
+                    <option value="ha" selected>Hausa UI</option>
+                    <option value="ar">العربية UI</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- DUA CARDS CONTAINER -->
+        <div class="dua-list" id="duaContainer"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; <span id="year"></span> <strong>Central Chakus</strong> (Ibrahim Abubakar Yakubu). All Rights Reserved.</p>
+    </footer>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast">Text copied to clipboard!</div>
+
+    <script>
+        // DATA SET OF ALL 14 DUAS & SURAHS
+        const duasData = [
+            {
+                id: 1,
+                titleEn: "Du'a of Distress",
+                titleHa: "Addu'ar Cire Bacin Rai da Damuwa",
+                arabic: "اللَّهُمَّ إِنِّي عَبْدُكَ، ابْنُ عَبْدِكَ، ابْنُ أَمَتِكَ، نَاصِيَتِي بِيَدِكَ، مَاضٍ فِيَّ حُكْمُكَ، عَدْلٌ فِيَّ قَضَاؤُكَ، أَسْأَلُكَ بِكُلِّ اسْمٍ هُوَ لَكَ، سَمَّيْتَ بِهِ نَفْسَكَ، أَوْ أَنْزَلْتَهُ فِي كِتَابِكَ، أَوْ عَلَّمْتَهُ أَحَدًا مِنْ خَلْقِكَ، أَوِ اسْتَأْثَرْتَ بِهِ فِي عِلْمِ الْغَيْبِ عِنْدَكَ، أَنْ تَجْعَلَ الْقُرْآنَ رَبِيعَ قَلْبِي، وَنُورَ صَدْرِي، وَجَلَاءَ حُزْنِي، وَذَهَابَ هَمِّي",
+                hausa: "Allahumma inni abduka, ibnu abdika, ibnu amatika, nasiyati biyadika, maadhin fiyya hukmuka, adlun fiyya qada'uka, as'aluka bikulli ismin huwa laka, sammaita bihi nafsaka, au anzaltahu fi kitabika, au allamtahu ahadan min khalqika, awi ista'tharta bihi fi ilmil ghaibi indaka, an taj'alal Qur'ana rabi'a qalbi, wa nura sadri, wa jala'a huzni, wa dhahaba hammi.",
+                audio: "https://server8.mp3quran.net/afs/001.mp3"
+            },
+            {
+                id: 2,
+                titleEn: "Du'a for Good Deeds",
+                titleHa: "Addu'ar Neman Aikata Alhairai",
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ فِعْلَ الْخَيْرَاتِ، وَتَرْكَ الْمُنْكَرَاتِ، وَحُبَّ الْمَسَاكِينِ، وَأَنْ تَغْفِرَ لِي، وَتَرْحَمَنِي، وَإِذَا أَرَدْتَ فِتْنَةَ قَوْمٍ فَتَوَفَّنِي غَيْرَ مَفْتُونٍ، وَأَسْأَلُكَ حُبَّكَ، وَحُبَّ مَنْ يُحِبُّكَ، وَحُبَّ عَمَلٍ يُقَرِّبُنِي إِلَى حُبِّكَ",
+                hausa: "Allahumma inni as'aluka fi'lal khairati, wa tarkal munkarati, wa hubbal masakini, wa an taghfira li, wa tarhamani, wa idha aradta fitnata qawmin fatawaffani ghaira maftunin, wa as'aluka hubbaka, wa hubba man yuhibbuka, wa hubba amalin yuqarribuni ila hubbika.",
+                audio: "https://server8.mp3quran.net/afs/002.mp3"
+            },
+            {
+                id: 3,
+                titleEn: "Amman Yujibul Mudtarra (Qur'an 27:62)",
+                titleHa: "Amman Yujibul Mudtarra (Suratu An-Naml: 62)",
+                arabic: "أَمَّن يُجِيبُ الْمُضْطَرَّ إِذَا دَعَاهُ وَيَكْشِفُ السُّوءَ وَيَجْعَلُكُمْ خُلَفَاءَ الْأَرْضِ ۗ أَإِلَٰهٌ مَّعَ اللَّهِ ۚ قَلِيلًا مَّا تَذَكَّرُونَ",
+                hausa: "Amman yujibul mudtarra iza da'ahu wa yakshifus su'a wa yaj'alukum khulafa'al ardi, a ilahun ma'allahi, qalilam ma tazakkarun.",
+                audio: "https://everyayah.com/data/Alafasy_128kbps/027062.mp3"
+            },
+            {
+                id: 4,
+                titleEn: "Du'a for Forgiveness (Laylatul Qadr)",
+                titleHa: "Addu'ar Neman Gafara",
+                arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+                hausa: "Allahumma innaka afuwwun tuhibbul afwa fa'fu anni.",
+                audio: "https://server8.mp3quran.net/afs/004.mp3"
+            },
+            {
+                id: 5,
+                titleEn: "Ayatul Kursiyyu (Qur'an 2:255)",
+                titleHa: "Ayatul Kursiyyu",
+                arabic: "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+                hausa: "Allahu la ilaha illa huwal hayyul qayyum, la ta'khuzuhu sinatun wa la nawm, lahu ma fis samawati wa ma fil ardi, man zallazi yashfa'u indahu illa bi iznihi, ya'lamu ma baina aidihim wa ma khalfahum, wa la yuhituna bi shai'im min ilmihi illa bima sha'a, wasi'a kursiyyuhus samawati wal arda, wa la ya'uduhu hifzuhuma, wa huwal aliyyul azim.",
+                audio: "https://everyayah.com/data/Alafasy_128kbps/002255.mp3"
+            },
+            {
+                id: 6,
+                titleEn: "La ilaha illallah",
+                titleHa: "Mafi Darajar Zikiri",
+                arabic: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+                hausa: "La ilaha illallahu wahdahu la sharika lahu, lahul mulku wa lahul hamdu, wa huwa ala kulli shai'in qadir.",
+                audio: "https://server8.mp3quran.net/afs/006.mp3"
+            },
+            {
+                id: 7,
+                titleEn: "Raditu Billahi Rabba",
+                titleHa: "Yadda Ake Amincewa da Allah da Addini",
+                arabic: "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا",
+                hausa: "Raditu billahi rabba, wa bil islami dina, wa bi Muhammadin sallallahu alaihi wa sallama nabiyya.",
+                audio: "https://server8.mp3quran.net/afs/007.mp3"
+            },
+            {
+                id: 8,
+                titleEn: "Bismillahillazi La Yadurru",
+                titleHa: "Addu'ar Tsari Daga Cutarwa",
+                arabic: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
+                hausa: "Bismillahillazi la yadurru ma'as mihi shai'un fil ardi wa la fis sama'i, wa huwas sami'ul alim.",
+                audio: "https://server8.mp3quran.net/afs/008.mp3"
+            },
+            {
+                id: 9,
+                titleEn: "Suratul Fatiha",
+                titleHa: "Suratul Fatiha",
+                arabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ، الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ، الرَّحْمَٰنِ الرَّحِيمِ ، مَالِكِ يَوْمِ الدِّينِ ، إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ، اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ، صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+                hausa: "Bismillahir rahmanir rahim, Alhamdu lillahi rabbil alamin, Arrahmanir rahim, Maliki yaumid din, Iyyaka na'budu wa iyyaka nasta'in, Ihdinas siratal mustaqim, Siratal lazina an'amta alaihim, ghairil maghdubi alaihim wa lad dallin.",
+                audio: "https://everyayah.com/data/Alafasy_128kbps/001001.mp3"
+            },
+            {
+                id: 10,
+                titleEn: "Suratul Ikhlas",
+                titleHa: "Suratul Ikhlas",
+                arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ ، اللَّهُ الصَّمَدُ ، لَمْ يَلِدْ وَلَمْ يُولَدْ ، وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
+                hausa: "Qul huwallahu ahad, Allahus samad, Lam yalid wa lam yulad, Wa lam yakul lahu kufuwan ahad.",
+                audio: "https://everyayah.com/data/Alafasy_128kbps/112001.mp3"
+            },
+            {
+                id: 11,
+                titleEn: "Suratul Falaq",
+                titleHa: "Suratul Falaq",
+                arabic: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ، مِن شَرِّ مَا خَلَقَ ، وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ، وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ، وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+                hausa: "Qul a'uzu bi rabbil falaq, Min sharri ma khalaq, Wa min sharri ghasiqin iza waqab, Wa min sharrin naffasati fil uqad, Wa min sharri hasidin iza hasad.",
+                audio: "https://everyayah.com/data/Alafasy_128kbps/113001.mp3"
+            },
+            {
+                id: 12,
+                titleEn: "Suratun Nas",
+                titleHa: "Suratun Nas",
+                arabic: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ ، مَلِكِ النَّاسِ ، إِلَٰهِ النَّاسِ ، مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ، الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ، مِنَ الْجِنَّةِ وَالنَّاسِ",
+                hausa: "Qul a'uzu bi rabbin nas, Malikin nas, Ilahin nas, Min sharril waswasil khannas, Allazi yuwaswisu fi sudurin nas, Minal jinnati wan nas.",
+                audio: "https://everyayah.com/data/Alafasy_128kbps/114001.mp3"
+            },
+            {
+                id: 13,
+                titleEn: "Du'a of Firmness",
+                titleHa: "Addu'ar Neman Tabbata A Kan Tafarki Madaidaici",
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الثَّبَاتَ فِي الْأَمْرِ، وَالْعَزِيمَةَ عَلَى الرُّشْدِ، وَأَسْأَلُكَ مُوجِبَاتِ رَحْمَتِكَ، وَعَزَائِمَ مَغْفِرَتِكَ، وَأَسْأَلُكَ شُكْرَ نِعْمَتِكَ، وَحُسْنَ عِبَادَتِكَ، وَأَسْأَلُكَ قَلْبًا سَلِيمًا، وَلِسَانًا صَادِقًا، وَأَسْأَلُكَ مِنْ خَيْرِ مَا تَعْلَمُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا تَعْلَمُ، وَأَسْتَغْفِرُكَ لِمَا تَعْلَمُ، إِنَّكَ أَنْتَ عَلَّامُ الْغُيُوبِ",
+                hausa: "Allahumma inni as'alukas sabata fil amri, wal azimata alar rushdi, wa as'aluka mujibati rahmatika, wa aza'ima maghfiratika, wa as'aluka shukra ni'matika, wa husna ibadatika, wa as'aluka qalban saliman, wa lisanan sadiqan, wa as'aluka min khairi ma ta'lamu, wa a'uzu bika min sharri ma ta'lamu, wa astaghfiruka lima ta'lamu, innaka anta allamul ghuyub.",
+                audio: "https://server8.mp3quran.net/afs/013.mp3"
+            },
+            {
+                id: 14,
+                titleEn: "Closing Du'a",
+                titleHa: "Addu'ar Rufewa",
+                arabic: "سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُونَ ، وَسَلَامٌ عَلَى الْمُرْسَلِينَ ، وَالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+                hausa: "Subhana rabbika rabbil izzati amma yasifun, wa salamun alal mursalin, wal hamdu lillahi rabbil alamin.",
+                audio: "https://everyayah.com/data/Alafasy_128kbps/037180.mp3"
+            }
+        ];
+
+        // UI TRANSLATIONS DICTIONARY
+        const uiTranslations = {
+            en: {
+                title: "Islamic Duas & Surahs",
+                subtitle: "Collection of Authentic Supplications and Qur'anic Chapters",
+                authorLabel: "Created by:",
+                searchPlaceholder: "Search Dua...",
+                toggleArabic: "Arabic Text",
+                toggleHausa: "Hausa Text",
+                showArabicBtn: "Show Arabic Text",
+                hideArabicBtn: "Hide Arabic Text",
+                showHausaBtn: "Show Hausa Version",
+                hideHausaBtn: "Hide Hausa Version",
+                copiedMsg: "Copied to clipboard!"
+            },
+            ha: {
+                title: "Addu'o'i da Surorin Musulunci",
+                subtitle: "Tarratsun Addu'o'i da Surori Daga Al-Qur'ani da Sunnah",
+                authorLabel: "An tsara shi ta hannun:",
+                searchPlaceholder: "Nemi Addu'a...",
+                toggleArabic: "Rubutun Larabci",
+                toggleHausa: "Fassarar Hausa",
+                showArabicBtn: "Buda Rubutun Larabci",
+                hideArabicBtn: "Boye Rubutun Larabci",
+                showHausaBtn: "Buda Fassarar Hausa",
+                hideHausaBtn: "Boye Fassarar Hausa",
+                copiedMsg: "An kwafa nasarar!"
+            },
+            ar: {
+                title: "الأدعية والسور الإسلامية",
+                subtitle: "مجموعة من الأدعية والأذكار والسور القرآنية",
+                authorLabel: "تم التطوير بواسطة:",
+                searchPlaceholder: "بحث عن دعاء...",
+                toggleArabic: "النص العربي",
+                toggleHausa: "ترجمة الهوسا",
+                showArabicBtn: "إظهار النص العربي",
+                hideArabicBtn: "إخفاء النص العربي",
+                showHausaBtn: "إظهار ترجمة الهوسا",
+                hideHausaBtn: "إخفاء ترجمة الهوسا",
+                copiedMsg: "تم النسخ بنجاح!"
+            }
+        };
+
+        let currentAudio = null;
+        let currentAudioId = null;
+        let currentFontScale = 1.8;
+        let activeLang = 'ha';
+
+        // INITIALIZE APP
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("year").textContent = new Date().getFullYear();
+            renderDuas();
+            changeLanguage('ha');
+        });
+
+        // RENDER DUA CARDS
+        function renderDuas() {
+            const container = document.getElementById("duaContainer");
+            container.innerHTML = "";
+
+            duasData.forEach(item => {
+                const title = activeLang === 'en' ? item.titleEn : item.titleHa;
+                const card = document.createElement("div");
+                card.className = "dua-card";
+                card.id = `dua-card-${item.id}`;
+                
+                card.innerHTML = `
+                    <div class="dua-header">
+                        <div class="dua-number-title">
+                            <span class="dua-number">${item.id}</span>
+                            <span class="dua-title">${title}</span>
+                        </div>
+                    </div>
+
+                    <!-- ARABIC SECTION TOGGLE -->
+                    <button class="toggle-btn" onclick="toggleSection('arabic-${item.id}', this)">
+                        <span class="btn-text">${uiTranslations[activeLang].showArabicBtn}</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div id="arabic-${item.id}" class="collapsible-content">
+                        <div class="arabic-text">${item.arabic}</div>
+                    </div>
+
+                    <!-- HAUSA SECTION TOGGLE -->
+                    <button class="toggle-btn" onclick="toggleSection('hausa-${item.id}', this)">
+                        <span class="btn-text">${uiTranslations[activeLang].showHausaBtn}</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div id="hausa-${item.id}" class="collapsible-content">
+                        <div class="hausa-text">${item.hausa}</div>
+                    </div>
+
+                    <!-- AUDIO & CARD TOOLS -->
+                    <div class="dua-tools">
+                        <div class="audio-player">
+                            <button class="play-btn" onclick="playAudio('${item.audio}', ${item.id})" id="play-btn-${item.id}">
+                                <i class="fa-solid fa-play"></i>
+                            </button>
+                            <span style="font-size:0.85rem; font-weight:600; color:var(--dark-green);">Audio</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="action-icon-btn" onclick="copyDua(${item.id})" title="Copy Text">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // TOGGLE COLLAPSIBLE SECTIONS
+        function toggleSection(targetId, btnEl) {
+            const content = document.getElementById(targetId);
+            const isArabic = targetId.startsWith('arabic');
+            const isOpen = content.classList.contains('open');
+
+            if (isOpen) {
+                content.classList.remove('open');
+                btnEl.querySelector('.btn-text').textContent = isArabic ? uiTranslations[activeLang].showArabicBtn : uiTranslations[activeLang].showHausaBtn;
+                btnEl.querySelector('i').className = 'fa-solid fa-chevron-down';
+            } else {
+                content.classList.add('open');
+                btnEl.querySelector('.btn-text').textContent = isArabic ? uiTranslations[activeLang].hideArabicBtn : uiTranslations[activeLang].hideHausaBtn;
+                btnEl.querySelector('i').className = 'fa-solid fa-chevron-up';
+            }
+        }
+
+        // GLOBAL TOGGLE ALL ARABIC OR HAUSA
+        function toggleAll(type) {
+            duasData.forEach(item => {
+                const targetId = `${type}-${item.id}`;
+                const content = document.getElementById(targetId);
+                const btn = content.previousElementSibling;
+                const isOpen = content.classList.contains('open');
+
+                if (!isOpen) {
+                    content.classList.add('open');
+                    btn.querySelector('.btn-text').textContent = type === 'arabic' ? uiTranslations[activeLang].hideArabicBtn : uiTranslations[activeLang].hideHausaBtn;
+                    btn.querySelector('i').className = 'fa-solid fa-chevron-up';
+                } else {
+                    content.classList.remove('open');
+                    btn.querySelector('.btn-text').textContent = type === 'arabic' ? uiTranslations[activeLang].showArabicBtn : uiTranslations[activeLang].showHausaBtn;
+                    btn.querySelector('i').className = 'fa-solid fa-chevron-down';
+                }
+            });
+        }
+
+        // AUDIO PLAYBACK HANDLER
+        function playAudio(url, id) {
+            const btn = document.getElementById(`play-btn-${id}`);
+
+            if (currentAudioId === id && currentAudio) {
+                if (currentAudio.paused) {
+                    currentAudio.play();
+                    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                } else {
+                    currentAudio.pause();
+                    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                }
+                return;
+            }
+
+            if (currentAudio) {
+                currentAudio.pause();
+                const prevBtn = document.getElementById(`play-btn-${currentAudioId}`);
+                if (prevBtn) prevBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            }
+
+            currentAudio = new Audio(url);
+            currentAudioId = id;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+
+            currentAudio.play().then(() => {
+                btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }).catch(e => {
+                console.error("Audio playback error:", e);
+                btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                showToast("Unable to load audio resource.");
+            });
+
+            currentAudio.onended = () => {
+                btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                currentAudioId = null;
+            };
+        }
+
+        // ADJUST ARABIC FONT SIZE
+        function adjustFontSize(delta) {
+            currentFontScale = Math.max(1.2, Math.min(3.0, currentFontScale + delta));
+            document.documentElement.style.setProperty('--arabic-font-scale', `${currentFontScale}rem`);
+        }
+
+        // FILTER DUAS BY SEARCH INPUT
+        function filterDuas() {
+            const query = document.getElementById("searchInput").value.toLowerCase();
+            duasData.forEach(item => {
+                const card = document.getElementById(`dua-card-${item.id}`);
+                const matches = item.titleEn.toLowerCase().includes(query) || 
+                                item.titleHa.toLowerCase().includes(query) || 
+                                item.arabic.includes(query) || 
+                                item.hausa.toLowerCase().includes(query);
+                card.style.display = matches ? "block" : "none";
+            });
+        }
+
+        // COPY DUA TEXT
+        function copyDua(id) {
+            const item = duasData.find(d => d.id === id);
+            const textToCopy = `${item.arabic}\n\n${item.hausa}`;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast(uiTranslations[activeLang].copiedMsg);
+            });
+        }
+
+        // DYNAMIC LANGUAGE SWITCHING FOR UI
+        function changeLanguage(lang) {
+            activeLang = lang;
+            const t = uiTranslations[lang];
+
+            document.getElementById("ui-title").textContent = t.title;
+            document.getElementById("ui-subtitle").textContent = t.subtitle;
+            document.getElementById("ui-author-label").textContent = t.authorLabel;
+            document.getElementById("searchInput").placeholder = t.searchPlaceholder;
+            document.getElementById("ui-toggle-arabic").textContent = t.toggleArabic;
+            document.getElementById("ui-toggle-hausa").textContent = t.toggleHausa;
+
+            renderDuas();
+        }
+
+        // SHOW TOAST NOTIFICATION
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
